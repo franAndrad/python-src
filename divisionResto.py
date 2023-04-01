@@ -1,7 +1,7 @@
 #----------------------------------------------------------------#
 #                       Andrade Francisco                        #
 # ---------------------------------------------------------------#
-#  Ejercicio: Plantear un script (directamente en el shell de    #
+#  EJERCICIO: Plantear un script (directamente en el shell de    #
 # Python) que permita informar, para dos valores a y b el        #
 # resultado de la división a/b y el resto de esa divisón.        #                           #
 #----------------------------------------------------------------#

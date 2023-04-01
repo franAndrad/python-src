@@ -1,7 +1,7 @@
 #----------------------------------------------------------------#
 #                       Andrade Francisco                        #
 # ---------------------------------------------------------------#
-#  Ejercicio: Plantear un script directamente en el shell de     #
+#  EJERCICIO: Plantear un script directamente en el shell de     #
 # Python, que permita mostrar, para dos valores a y b, el valor  #
 # del cuadrado del binomio.                                      #
 #----------------------------------------------------------------#
