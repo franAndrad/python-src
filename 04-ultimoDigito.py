@@ -11,6 +11,6 @@
 # ----------------------------------------------------------------#
 
 entero = int(input('\nIngrese el numero a separar su ultimo digito: '))
-ultimo = entero % 10
-resto = int(entero / 10)
-print('Del entero',entero,'se separo', resto , 'por un lado y', ultimo, 'por otro\n')
+unidad = entero % 10
+decenas = entero % 100
+print('Del entero',entero,'se separo', unidad , 'por un lado y', decenas, 'por otro\n')
