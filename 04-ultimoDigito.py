@@ -13,4 +13,4 @@
 entero = int(input('\nIngrese el numero a separar su ultimo digito: '))
 unidad = entero % 10
 decenas = entero % 100
-print('Del entero',entero,'se separo', unidad , 'por un lado y', decenas, 'por otro\n')
+print('La unidad es ', unidad , 'y la decena', decenas, '\n')
