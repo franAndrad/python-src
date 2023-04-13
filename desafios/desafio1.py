@@ -16,3 +16,23 @@
 # partir de esos datos. Por ejemplo, si los datos ingresados fuesen: horas = 4, minutos = 36 y segundos = 8 #
 # entonces el resultado a obtener es que la cantidad total de segundos es 16568.                            #
 # ----------------------------------------------------------------------------------------------------------#
+
+
+# Proceso normal
+num = int(input('\nIngrese la cantidad de segundos: '))
+h = int(num/3600)
+
+if h<=24:
+    m = int((num - (h*3600))/60)
+    s = num -((h*3600) + (m*60))
+    print('\n' + str(h) + ':' + str(m) + ':' + str(s) + '\n')
+else:
+    print('Excedido\n')
+
+
+# Proceso inverso
+hs = int(h*3600)
+ms = int(m*60)
+st = hs + ms + s
+
+print(str(st) + '\n')
