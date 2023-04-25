@@ -43,6 +43,8 @@ elif vehiculo == 1:
     importe_vehiculo = importe
 elif vehiculo == 2:
     importe_vehiculo = importe + (60*importe)/100
+else:
+    importe_vehiculo = 0
 
 # Descuento por pago de telepeage
 if pago == 1:
