@@ -1,7 +1,7 @@
 # Datos ingresados
 patente = input('Ingrese la patente: ')
 vehiculo = int(input('Ingrese el vehiculo (0:Motocicleta 1:Auto 2:Camion): '))
-pago = int(input('Ingrese el metodo de pago (1:manual 2:telepeaje)'))
+pago = int(input('Ingrese el metodo de pago (1:manual 2:telepeaje): '))
 pais = int(input('Ingrese el pais (0:Argentina 1:Bolivia 2:Brasil 3:Paraguay 4:Uruguay): '))
 distancia = float(input('Ingrese la distancia en km: '))
 
@@ -72,4 +72,3 @@ print(' Importe basico:\t $', importe_vehiculo)
 print(' Total:\t\t\t $', total)
 print(' Promedio/km:\t\t', promedio)
 print('-------------------------------------------')
-print('\n')
