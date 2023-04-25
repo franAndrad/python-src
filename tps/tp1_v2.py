@@ -10,18 +10,18 @@ paises = ('Argentina', 'Bolivia', 'Brasil', 'Paraguay', 'Uruguay','Otro')
 
 # Proceso para determinar patente
 if len(patente) == 7:
-    if patente[0].isdigit() or patente[1].isdigit():
+    if patente[0].isnumeric() or patente[1].isnumeric():
         patente_pais = paises[5]
-    elif patente[2].isdigit() and not patente[5].isdigit() and not patente[6].isdigit():
+    elif patente[2].isnumeric() and not patente[5].isnumeric() and not patente[6].isnumeric():
         patente_pais = paises[0]
-    elif patente[2].isdigit() and patente[5].isdigit() and patente[6].isdigit():
+    elif patente[2].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
         patente_pais = paises[1]
-    elif patente[3].isdigit() and patente[5].isdigit() and patente[6].isdigit():
-        if patente[4].isdigit():
+    elif patente[3].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
+        if patente[4].isnumeric():
             patente_pais = paises[4]
         else:
             patente_pais = paises[2]
-    elif patente[4].isdigit() and patente[5].isdigit() and patente[6].isdigit():
+    elif patente[4].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
         patente_pais = paises[3]
     else:
         patente_pais = paises[5]
