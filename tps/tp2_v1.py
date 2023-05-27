@@ -113,6 +113,7 @@ def datos_vehiculo(cant_caracteres, caracteres, patente, vehiculo, pago, pais, d
 def archivo_telepeaje(nombre,apertura):
     cant_caracteres = 0
     cant_palabra = 0
+    cantidad_patentes = 0
     
     # Variables para el lenguaje
     primer_palabra = ''
