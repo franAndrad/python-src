@@ -119,7 +119,7 @@ def datos_vehiculo(cant_caracteres, caracteres, patente, vehiculo, pago, pais, d
         distancia += caracteres
     return patente,vehiculo,pago,pais,distancia
 
-def archivo_telepeaje():
+def principal():
     cant_caracteres = 0
     cant_palabra = 0
     cantidad_patentes = 0
@@ -228,4 +228,4 @@ def archivo_telepeaje():
     print('(r7) - Distancia promedio recorrida por vehículos argentinos pasando por cabinas brasileñas:', prom, '\bkm')
     
 # Determinar datos al pasar por el telepeaje mediante el documento
-archivo_telepeaje ()
+principal ()
