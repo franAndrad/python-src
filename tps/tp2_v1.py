@@ -119,7 +119,7 @@ def datos_vehiculo(cant_caracteres, caracteres, patente, vehiculo, pago, pais, d
         distancia += caracteres
     return patente,vehiculo,pago,pais,distancia
 
-def archivo_telepeaje(nombre,apertura):
+def archivo_telepeaje():
     cant_caracteres = 0
     cant_palabra = 0
     cantidad_patentes = 0
@@ -151,8 +151,10 @@ def archivo_telepeaje(nombre,apertura):
     cant_vehiculos_Arg_cabina_Br = 0
     suma_distancia_vehiculos_Arg_cabina_Br = 0
     
-    archivo = open(nombre,apertura)
-    for caracteres in archivo.read():
+    archivo = open('telepeaje.txt', 'rt', encoding="utf-8")
+    documento = archivo.read()
+    archivo.close()
+    for caracteres in documento:
         cant_caracteres += 1
         if caracteres != '\n':
             if cant_palabra == 0:
@@ -200,8 +202,6 @@ def archivo_telepeaje(nombre,apertura):
             cant_palabra += 1
             cant_caracteres = 0
         
-    archivo.close()
-    
     porc = porcentaje(cotr, cantidad_patentes)
     prom = promedio(cant_vehiculos_Arg_cabina_Br,suma_distancia_vehiculos_Arg_cabina_Br)
     
@@ -228,4 +228,4 @@ def archivo_telepeaje(nombre,apertura):
     print('(r7) - Distancia promedio recorrida por vehículos argentinos pasando por cabinas brasileñas:', prom, '\bkm')
     
 # Determinar datos al pasar por el telepeaje mediante el documento
-archivo_telepeaje ('telepeaje.txt','r')
+archivo_telepeaje ()
