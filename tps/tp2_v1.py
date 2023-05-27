@@ -1,5 +1,10 @@
 def cantidad_patentes_pais(patente, carg, cbol, cbra, cchi, cpar, curu, cotr):
     # falta tener en cuenta el primer espacio para que no lo tome en los otros paises
+    print(patente)
+    is_c_vacio = False
+    if patente[0] == ' ':
+        is_c_vacio = True
+        
     if len(patente) == 7:
         if patente[0].isnumeric() or patente[1].isnumeric():
             cotr += 1
@@ -7,22 +12,26 @@ def cantidad_patentes_pais(patente, carg, cbol, cbra, cchi, cpar, curu, cotr):
         elif patente[2].isnumeric() and not patente[5].isnumeric() and not patente[6].isnumeric():
             carg += 1
             pais = 'Argentina'
-        elif patente[2].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
+        elif not is_c_vacio and patente[2].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
             cbol += 1
             pais = 'Bolivia'
-        elif patente[3].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
+        elif not is_c_vacio and patente[3].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
             if patente[4].isnumeric():
                 curu += 1
                 pais = 'Uruguay'
             else:
                 cbra += 1
                 pais = 'Brasil'
-        elif patente[4].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
-            cpar += 1
-            pais = 'Paraguay'
         elif patente[5].isnumeric() and patente[6].isnumeric():
-            cchi += 1
-            pais = 'Chile'
+            if not is_c_vacio and patente[4].isnumeric():
+                cpar += 1
+                pais = 'Paraguay'
+            elif is_c_vacio and not patente[2].isnumeric() and not patente[3].isnumeric() and not patente[4].isnumeric():
+                cchi += 1
+                pais = 'Chile'
+            else:    
+                cotr += 1
+                pais = 'Otro'
         else:
             cotr += 1
             pais = 'Otro'
