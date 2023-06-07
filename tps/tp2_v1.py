@@ -148,10 +148,10 @@ def principal():
     maypat = 0
 
     # Variables para el promedio de los vehiculos Arg que pasan por la cabina Br
-    cant_vehiculos_Arg_cabina_Br = 0
-    suma_distancia_vehiculos_Arg_cabina_Br = 0
+    cant_vehiculos_arg_cabina_br = 0
+    suma_distancia_vehiculos_arg_cabina_br = 0
     
-    archivo = open('telepeaje.txt', 'rt', encoding="utf-8")
+    archivo = open('peaje.txt', 'rt')
     documento = archivo.read()
     archivo.close()
     for caracteres in documento:
@@ -192,8 +192,8 @@ def principal():
             
             # Determinacion de vehiculos Argentinos que pasaron por una cabina brasilera
             if procedencia == 'Argentina' and cabina_pais == 'Brasil':
-                cant_vehiculos_Arg_cabina_Br += 1
-                suma_distancia_vehiculos_Arg_cabina_Br += float(distancia)
+                cant_vehiculos_arg_cabina_br += 1
+                suma_distancia_vehiculos_arg_cabina_br += float(distancia)
           
             patente,vehiculo,pago,pais,distancia = '', '', '', '', ''
             cant_caracteres = 0
@@ -203,7 +203,7 @@ def principal():
             cant_caracteres = 0
         
     porc = porcentaje(cotr, cantidad_patentes)
-    prom = promedio(cant_vehiculos_Arg_cabina_Br,suma_distancia_vehiculos_Arg_cabina_Br)
+    prom = promedio(cant_vehiculos_arg_cabina_br,suma_distancia_vehiculos_arg_cabina_br)
     
     # Visualicación de resultados...
     print()
