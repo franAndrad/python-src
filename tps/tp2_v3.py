@@ -1,43 +1,26 @@
-def cantidad_patentes_pais(patente, carg, cbol, cbra, cchi, cpar, curu, cotr):
+def patentes_pais(patente):
     is_c_vacio = False
     if patente[0] == ' ':
         is_c_vacio = True
 
     if len(patente) == 7:
         if patente[0].isnumeric() or patente[1].isnumeric():
-            cotr += 1
-            pais = 'Otro'
+            return 'Otro'
         elif not is_c_vacio and patente[2].isnumeric() and not patente[5:].isnumeric():
-            carg += 1
-            pais = 'Argentina'
+            return 'Argentina'
         elif not is_c_vacio and patente[2].isnumeric() and patente[5:].isnumeric():
-            cbol += 1
-            pais = 'Bolivia'
+            return 'Bolivia'
         elif not is_c_vacio and patente[3].isnumeric() and patente[5:].isnumeric():
             if patente[4].isnumeric():
-                curu += 1
-                pais = 'Uruguay'
+                return 'Uruguay'
             else:
-                cbra += 1
-                pais = 'Brasil'
+                return 'Brasil'
         elif patente[5:].isnumeric():
             if not is_c_vacio and patente[4].isnumeric():
-                cpar += 1
-                pais = 'Paraguay'
+                return 'Paraguay'
             elif is_c_vacio and not patente[2:4].isnumeric() and not patente[4].isnumeric():
-                cchi += 1
-                pais = 'Chile'
-            else:
-                cotr += 1
-                pais = 'Otro'
-        else:
-            cotr += 1
-            pais = 'Otro'
-    else:
-        cotr += 1
-        pais = 'Otro'
-    return carg, cbol, cbra, cchi, cpar, curu, cotr, pais
-
+                return 'Chile'
+        return 'Otro'
 
 def cobro(pais):
     paises_mercosur = ('Argentina', 'Bolivia', 'Brasil', 'Paraguay', 'Uruguay')
@@ -116,7 +99,8 @@ def principal():
     idioma = ''
 
     # Variables cantidad de patentes paises ,procedencia del pais y cabina de ingreso
-    carg, cbol, cbra, cchi, cpar, curu, cotr, procedencia = 0, 0, 0, 0, 0, 0, 0, ''
+    carg = cbol = cbra = cchi = cpar = curu = cotr = 0 
+    procedencia = ''
 
     # Variables para determinar los datos del vehiculo ingresado
     patente, vehiculo, pago, pais, distancia = '', '', '', '', ''
@@ -133,7 +117,7 @@ def principal():
     cant_vehiculos_arg_cabina_br = 0
     suma_distancia_vehiculos_arg_cabina_br = 0
 
-    archivo = open('./peaje50.txt', 'rt')
+    archivo = open('./peaje100.txt', 'rt')
     primer_linea = archivo.readline().upper()
     idioma = lenguaje(primer_linea)
 
@@ -150,8 +134,21 @@ def principal():
         distancia = float(linea[10:13])
 
         # cantidad de patentes de los paises
-        carg, cbol, cbra, cchi, cpar, curu, cotr, procedencia = cantidad_patentes_pais(
-            patente, carg, cbol, cbra, cchi, cpar, curu, cotr)
+        procedencia = patentes_pais(patente)
+        if procedencia == 'Argentina':
+            carg += 1
+        elif procedencia == 'Bolivia':
+            cbol += 1
+        elif procedencia == 'Brasil':
+            cbra += 1
+        elif procedencia == 'Chile':
+            cchi += 1
+        elif procedencia == 'Otro':
+            cotr += 1
+        elif procedencia == 'Paraguay':
+            cpar += 1
+        elif procedencia == 'Uruguay':
+            curu += 1
 
         base, cabina_pais = cobro(pais)
         subtotal = importe_vehiculo(vehiculo, base)
