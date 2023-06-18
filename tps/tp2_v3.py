@@ -77,7 +77,7 @@ def lenguaje(palabra):
     if sES:
         return 'Español'
     elif sPT:
-        return 'Portugues'
+        return 'Portugués'
 
 
 def porcentaje(cantidad, total):
@@ -117,7 +117,7 @@ def principal():
     cant_vehiculos_arg_cabina_br = 0
     suma_distancia_vehiculos_arg_cabina_br = 0
 
-    archivo = open('./peaje100.txt', 'rt')
+    archivo = open('./peaje25.txt', 'rt')
     primer_linea = archivo.readline().upper()
     idioma = lenguaje(primer_linea)
 
