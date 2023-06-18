@@ -10,9 +10,13 @@ La empresa *Peajes de Sudamérica*, conociendo el éxito de la versión 1.0 desa
 
 Otra vez, el programa deberá procesar datos de vehículos cuyas patentes pueden ser de cualquiera de los países del Mercosur, de acuerdo al mismo modelo anterior,  *pero ahora se agrega también la patente chilena*, cuyo formato es ligeramente diferente según las gráficas siguientes: 
 
-Patentes Mercosur ![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.001.png)![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.002.png)![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.003.png)
+Patentes Mercosur 
 
-Patentes Chile ![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.004.png)![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.005.png)![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.006.png)![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.007.png)![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.008.png)
+![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.004.png)
+
+Patentes Chile 
+
+![](Aspose.Words.b68d4442-c07e-4dfe-9328-8ac3b91b8446.005.png)
 
 Igual que en la versión 1.0 (TP1), los patrones de las patentes Mercosur son los siguientes: 
 
