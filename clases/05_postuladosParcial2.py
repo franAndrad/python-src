@@ -13,7 +13,7 @@ def test():
     # contenido = documento.read()
     # documento.close()
     
-    contenido = 'asda asdadad asd fhs hth ardefs defhn d1e ldeuhj deg de.'
+    contenido = 'asda asdadad asd fhs hth ardefs defhn d1e ldeuhj deg dea.'
     cc = 0
     
     # Punto 1
@@ -21,8 +21,7 @@ def test():
     
     # Punto 2
     es_primera_texto = True
-    palabra_primera_del_texto = False
-    primera_texto = cont_palabra_primera_del_texto = 0
+    primera_texto = cont_palabra_ultima_primera_del_texto = 0
     
     # Punto 3
     h_paso_primero = tiene_h = False
@@ -37,8 +36,8 @@ def test():
             if cc > 3:
                 cp3 += 1
         
-            if palabra_primera_del_texto:
-                cont_palabra_primera_del_texto += 1
+            if primera_texto == ultima:
+                cont_palabra_ultima_primera_del_texto += 1
                 
             if not h_paso_primero and ultima != 'h' and tiene_h:
                 cp_h += 1
@@ -48,8 +47,6 @@ def test():
         
             # Reseteo
             cl = cc = 0
-            
-            palabra_primera_del_texto = False
             
             h_paso_primero = tiene_h = False
             
@@ -64,9 +61,6 @@ def test():
                     primera_texto = car
                     es_primera_texto = False
                 cl += 1
-                
-                if primera_texto == car and cc == 1:
-                    palabra_primera_del_texto = True
             
                 if cc == 1 and car == 'h':
                     h_paso_primero = True
@@ -84,7 +78,7 @@ def test():
                 ultima = car
 
     print(cp3)
-    print(cont_palabra_primera_del_texto)
+    print(cont_palabra_ultima_primera_del_texto)
     print(cp_h)
     print(cde_primera_mitad)
     
