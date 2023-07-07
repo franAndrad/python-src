@@ -1,3 +1,9 @@
+# Consignas
+# 5 - Determinar la cantidad de palabras que incluyeron alguna letra e.
+# 4 - Determinar la cantidad de palabras que incluyeron la sílaba 'de'.
+# 10 - Determinar la cantidad de palabras que comienzan con la letra 'll'.
+# 8 - Determinar cuantas palabras tuvieron 'u' y terminaron en 'lo'.
+
 def test():
     contenido = 'asd ased asdasde ajvdjaseda adse llave aulo heullo.'
     
@@ -15,7 +21,7 @@ def test():
     
     # Punto 4
     tiene_u = False 
-    ultimo = cont_palabras_tiene_u_term_lo = esta_l = 0
+    ultimo = cont_palabras_tiene_u_term_lo = posicion_l = 0
     
     
     for car in contenido:
@@ -34,7 +40,7 @@ def test():
                 cont_comienza_ll += 1
             
             # Punto 4
-            if tiene_u and esta_l == cc-1 and ultimo == 'o':
+            if tiene_u and posicion_l == cc-1 and ultimo == 'o':
                 cont_palabras_tiene_u_term_lo += 1
             
             # Volver al inicio despues de la palabra 
@@ -51,7 +57,7 @@ def test():
             
             # Punto 4
             tiene_u = False
-            esta_l = ultimo = 0
+            posicion_l = ultimo = 0
             
         else:
             
@@ -80,7 +86,7 @@ def test():
                 tiene_u = True
             
             if car == 'l':
-                esta_l = cc
+                posicion_l = cc
                 
             ultimo = car
             
