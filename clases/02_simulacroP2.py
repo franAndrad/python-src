@@ -1,8 +1,8 @@
 def es_vocal(car):
     return car.lower() in 'aeiou'
+
 def es_consonante(car):
     return car.lower() in 'bcdfghjklmnñpqrstvwxyz'
-    
     
 def test():
     # contenido = 'Hace falta coraje para saltar de ese punto.'
