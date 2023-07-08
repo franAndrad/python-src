@@ -14,6 +14,7 @@ def test():
     # documento.close()
     
     contenido = 'asda asdadad asd fhs hth ardefs defhn d1e ldeuhj deg dea.'
+    # contenido = 'pepito roba bancop hohla hohlh ohl def fdsfde sdsdedasddsas.'
     cc = 0
     
     # Punto 1
