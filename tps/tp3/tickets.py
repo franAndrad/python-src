@@ -1,7 +1,7 @@
 class Ticket:
     def __init__(self, id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido):
         self.id = id
-        self.patente = patente
+        self.patente = patente.upper()
         self.tipo_vehiculo = tipo_vehiculo
         self.forma_pago = forma_pago
         self.cabina_pais = cabina_pais
