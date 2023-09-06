@@ -1,9 +1,6 @@
 import tickets
-import validacion
-
 
 ######### OPCION 1 ########
-
 def cargar_tickets(vector_tickets, docfile):
     archivo = open(docfile, 'rt')
     timestap = archivo.readline()
@@ -13,68 +10,122 @@ def cargar_tickets(vector_tickets, docfile):
         if linea == '' or linea == '\n':
             break
         
-        id = int(linea[0:10])
+        id = linea[0:10]
         patente = linea[10:17]
-        tipo_vehiculo = int(linea[17])
-        forma_pago = int(linea[18])
-        cabina_pais = int(linea[19])
-        km_recorrido = int(linea[20:23])
+        tipo_vehiculo = linea[17]
+        forma_pago = linea[18]
+        cabina_pais = linea[19]
+        km_recorrido = linea[20:23]
         
         vector_tickets.append(tickets.Ticket(id,patente,tipo_vehiculo,forma_pago,cabina_pais,km_recorrido))
         
     archivo.close()
 
-
-
-
 ######### OPCION 2 ########
-
+def validacion_rango(a, b, var):
+    if a <= var <= b:
+        return True
+    return False
+def validacion_solo_digitos(vector):
+    tam = len(vector)
+    cont_digit = 0
+    for i in vector:
+        if i.isdigit():
+            cont_digit += 1
+    if cont_digit == tam:
+        return True
+    return False
 def cargar_nuevo_ticket(vector_tickets):
     
-    id = int(input('\nIngrese una id: '))
-    while validacion.id(id):
-        print("\nIngrese una id valida\n")
-        id = int(input('Ingrese una id: '))
+    # Validacion de que sean solo digitos y y este entre 1 y 9999999999 incluidos
+    id = input('\nIngrese una id: ')
+    while True:
+        if validacion_solo_digitos(id): 
+            if validacion_rango(1, 9999999999, int(id)):
+                break
+            else:
+                print("\nIngrese una id valida\n")
+                id = input('Ingrese una id: ')
+        else:
+            print("\nIngrese una id valida\n")
+            id = input('Ingrese una id: ')
+            
+
+    # Valida que la patente tenga 7 digitos y si tiene 6 le agrega un espacio al comienzo
+    patente = input('\nIngrese la patente: ').replace(' ', '')
+    while True:
+        if validacion_rango(6,7,len(patente)):
+            break
+        else: 
+            print("\nIngrese una patente valida\n")
+            patente = input('Ingrese la patente: ').replace(' ', '')
+    if len(patente) == 6:
+        patente = ' ' + patente
     
-    patente = input('\nIngrese la patente: ')
-    while validacion.patente(patente):
-        print("\nIngrese una patente valida\n")
-        patente = input('Ingrese la patente: ')
-        
-    tipo_vehiculo = int(input('\nIngrese el tipo de vehiculo: '))
-    while validacion.tipo_vehiculo(tipo_vehiculo):
-        print("\nIngrese un tipo de vehiculo valido\n")
-        tipo_vehiculo = int(input('Ingrese el tipo de vehiculo: '))
-        
-    forma_pago = int(input('\nIngrese la forma de pago: '))
-    while validacion.forma_pago(forma_pago):
-        print("\nIngrese una forma de pago valida\n")
-        forma_pago = int(input('\nIngrese la forma de pago: '))
-        
-    cabina_pais = int(input('\nIngrese el pais de la cabina donde se hizo el cobro: '))
-    while validacion.cabina_pais(cabina_pais):
-        print("\Ingrese un pais de cobro valido\n")
-        cabina_pais = int(input('\nIngrese el pais de la cabina donde se hizo el cobro: '))
+    # Valida que sean solo digitos y que este entre 0 y 2 incluidos
+    tipo_vehiculo = input('Ingrese el tipo de vehiculo: ')
+    while True:
+        if validacion_solo_digitos(tipo_vehiculo):
+            if validacion_rango(0,2,int(tipo_vehiculo)):
+                break
+            else:
+                print("\nIngrese un tipo de vehiculo valido\n")
+                tipo_vehiculo = input('Ingrese el tipo de vehiculo: ')
+        else:
+            print("\nIngrese un tipo de vehiculo valido\n")
+            tipo_vehiculo = input('Ingrese el tipo de vehiculo: ')
+            
+    # Valida que sean solo digitos y que este entre 1 y 2 incluidos    
+    forma_pago = input('Ingrese la forma de pago: ')
+    while True:
+        if validacion_solo_digitos(forma_pago):
+            if validacion_rango(1,2,int(forma_pago)):
+                break
+            else:
+                print("\nIngrese una forma de pago valida\n")
+                forma_pago = input('Ingrese la forma de pago: ')
+        else:
+            print("\nIngrese una forma de pago valida\n")
+            forma_pago = input('Ingrese la forma de pago: ')
+    
+    # Valida que sean solo digitos y que este entre 0 y 4 incluidos
+    cabina_pais = input('Ingrese el pais de la cabina donde se hizo el cobro: ')
+    while True:
+        if validacion_solo_digitos(cabina_pais):
+            if validacion_rango(0,4,int(cabina_pais)):
+                break
+            else:
+                print("\nIngrese un pais de cobro valido\n")
+                cabina_pais = input('Ingrese el pais de la cabina donde se hizo el cobro: ')
+        else:
+            print("\nIngrese un pais de cobro valido\n")
+            cabina_pais = input('Ingrese el pais de la cabina donde se hizo el cobro: ')
 
-    km_recorrido = int(input('\nIngrese la distancia en km desde la ultima cabina: '))
-    while validacion.distancia(km_recorrido):
-        print("\Ingrese una distancia en km valida")
-        km_recorrido = int(input('\nIngrese la distancia en km desde la ultima cabina: '))
-
-    vector_tickets.append(tickets.Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido))
-
-
-
+    # Valida que sean solo numeros y si es menor que 100 agrega ceros a la izquierda y lo convierte en cadena
+    km_recorrido = input('Ingrese la distancia en km desde la ultima cabina: ')
+    while True:
+        if validacion_solo_digitos(km_recorrido):
+            if validacion_rango(0,999,int(km_recorrido)):
+                break
+            else:
+                print("\nIngrese una distancia en km valida\n")
+                km_recorrido = input('Ingrese la distancia en km desde la ultima cabina: ')
+        else:
+            print("\nIngrese una distancia en km valida\n")
+            km_recorrido = input('Ingrese la distancia en km desde la ultima cabina: ')
+            
+    # Agrega los ceros a la izquierda si el numero es menor que 100
+    km_recorrido_3_digitos = f"{int(km_recorrido):03}" 
+    
+    vector_tickets.append(tickets.Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido_3_digitos))
 
 ######### OPCION 3 ########
-
 def ordenamiento_secuencial(vector):
     for i in range(len(vector) - 1):
         for j in range(i + 1, len(vector)):
-            if vector[i].id > vector[j].id:
+            if int(vector[i].id) > int(vector[j].id):
                 vector[i], vector[j] = vector[j], vector[i]
 # Funcion para mostrar el vector registro 
-
 def mostrar_tickets(vector_tickets,ordenar=0): # mostrar(vector, 0:desordenado 1:ordenado mayor a menor, )
     print("\n\nRegistro de tickets\n")
     
@@ -83,39 +134,25 @@ def mostrar_tickets(vector_tickets,ordenar=0): # mostrar(vector, 0:desordenado 1
     for ticket in vector_tickets:
         print(ticket)
         
-       
-       
-        
 ######### OPCION 4 ########
-
 def buscar(vector_tickets,patente,cabina_pais):
     for ticket in vector_tickets:
-        if ticket.patente == patente.upper() and ticket.cabina_pais == cabina_pais:
+        if ticket.patente.replace(' ','') == patente.upper().replace(' ','') and ticket.cabina_pais == cabina_pais:
             return ticket
     return '\nNo se encontro ninguna patente para esta cabina!\n'                
    
-   
-   
-   
- ######### OPCION 5 ########
-
+######### OPCION 5 ########
 def modificar_forma_pago(vector_tickets,id):
     for ticket in vector_tickets:
         if ticket.id == id:
-            print (ticket.forma_pago)
             if ticket.forma_pago == 1:
                 ticket.forma_pago = 2
             else:
                 ticket.forma_pago = 1
-            return '\nSe cambio la forma de pago para la id '+ str(ticket.id)
+            return '\nSe cambio la forma de pago para la id '+ ticket.id
     return '\nNo se encontro la id ingresada!\n'
          
-         
-
-
-
-
- ######### OPCION 6 ######## 
+######### OPCION 6 ######## 
 def origen_patentes_pais(patente):
     is_c_vacio = False
     if patente[0] == ' ':
@@ -144,19 +181,13 @@ def origen_patentes_pais(patente):
             return 6
     else:
         return 6
-
 def vehiculos_por_cabina_pais(vector_tickets):
     vector_conteo = 7*[0]
     for ticket in vector_tickets:
         vector_conteo[origen_patentes_pais(ticket.patente)] += 1
     return vector_conteo
-                 
-    
-    
-    
-    
- ######### OPCION 7 ########
-    
+          
+######### OPCION 7 ########
 def cobro(pais):
     paises_mercosur = ('Argentina', 'Bolivia', 'Brasil', 'Paraguay', 'Uruguay')
     if paises_mercosur[pais] == 'Brasil':
@@ -169,7 +200,6 @@ def cobro(pais):
         return 300, 'Paraguay'
     elif paises_mercosur[pais] == 'Uruguay':
         return 300, 'Uruguay'
-
 def importe_vehiculo(vehiculo, importe):
     if vehiculo == 0:
         return importe - (50*importe)/100
@@ -179,7 +209,6 @@ def importe_vehiculo(vehiculo, importe):
         return importe + (60*importe)/100
     else:
         return 0
-
 def forma_pago(pago, importe):
     if pago == 1:
         return importe
@@ -187,33 +216,28 @@ def forma_pago(pago, importe):
         return importe - (10*importe)/100
     else:
         return 0
-
 def importe_acumulado_por_pagos(vector_tickets):
     vector_acumulador = 3*[0]
     for ticket in vector_tickets:
-        base, cabina_pais = cobro(ticket.cabina_pais)
-        subtotal = importe_vehiculo(ticket.tipo_vehiculo, base)
-        total = forma_pago(ticket.forma_pago, subtotal)
+        base, cabina_pais = cobro(int(ticket.cabina_pais))
+        subtotal = importe_vehiculo(int(ticket.tipo_vehiculo), base)
+        total = forma_pago(int(ticket.forma_pago), subtotal)
         # Acumulo en base al total calculador (cabina+tipo_vehiculo+forma_pago)
-        vector_acumulador[ticket.tipo_vehiculo] += total
+        vector_acumulador[int(ticket.tipo_vehiculo)] += total
     return vector_acumulador
-
-
 
 ######### OPCION 9
 def distancias_acumulada(vector_ticket):
     acum = 0
     for ticket in vector_ticket:
-        acum += ticket.km_recorrido
+        acum += int(ticket.km_recorrido)
     return acum
-
 def cantidad_mayores(a,vector_ticket):
     cant = 0
     for ticket in vector_ticket:
-        if ticket.km_recorrido > a:
+        if int(ticket.km_recorrido) > a:
             cant += 1
     return cant
-    
     
     
 def main():
@@ -237,7 +261,6 @@ def main():
         print('8.Vehiculo con mayor monto acumulado y su porcentaje con respecto al total')
         print('9.Distancia promedio desde la ultima cabina recorrida entre todos los vehiculos y los que recorrieron una distancia mayor al promedio')
         op = int(input('\nIngrese una opcion: '))
-
         
         # ¿Mantenemos las opciones asi o las separamos por funciones?
         if op == 1:
@@ -265,12 +288,12 @@ def main():
             
         if op == 4:
             patente = input("\nIngrese la patente a buscar: ")
-            cabina_pais = int(input("\n Ingrese el pais de la cabina donde se hizo el cobro: "))
+            cabina_pais = input("\nIngrese el pais de la cabina donde se hizo el cobro: ")
             mensaje = buscar(vector_tickets, patente ,cabina_pais)
             print(mensaje)
     
         if op == 5:
-            id = int(input("\nIngrese el codigo de la patente a cambiar su forma de pago: "))
+            id = input("\nIngrese el codigo de ticket a cambiar su forma de pago: ")
             mensaje = modificar_forma_pago(vector_tickets,id)
             print(mensaje)
         
@@ -287,10 +310,7 @@ def main():
             print('\nImporte acumulado por tipo de vehiculo:')
             for i in range(len(vector_acumulador)):
                 print(vehiculos[i], vector_acumulador[i])
-        
-        
-        
-        # Desde aqui hacia abajo se puede optimizar        
+               
         if op == 8:
             if len(vector_acumulador) > 0:
                 mayor = max(vector_acumulador)
@@ -299,27 +319,22 @@ def main():
                 porcentaje = mayor * 100 // total
                 
                 print('\nMayor:',mayor)
-                print('Porcentaje:',porcentaje + ' %')
+                print('Porcentaje:', str(porcentaje) + ' %')
             else:
                 print('\nNescesita primero obtener el vector acumulador en la opcion 7')
                 
         if op == 9:
-            
-            # Consultar sobre la consigna ¿Cual es la última cabina recorrida?
             acumulador_distancias = distancias_acumulada(vector_tickets)
-            ultimo = vector_tickets[-1].km_recorrido
+            total_vehiculos = len(vector_tickets)
             
             if acumulador_distancias > 0:
-                promedio = ultimo // acumulador_distancias    
+                promedio = acumulador_distancias // total_vehiculos    
                 cant_may = cantidad_mayores(promedio,vector_tickets)
                 print('\nEl promedio es de: ',promedio)
-                print('La cantidad de valores mayores que el promedio son: ',cant_may)
-            
+                print('La cantidad de autos con una distancia mayor al promedio son: ',cant_may)           
             else:
-                print('Debe ingresar valores de tickets!')
+                print('\nDebe ingresar valores de tickets!\n')
             
             
 if __name__ == '__main__':
     main()
-    
-# Consultar si al mostrar el vector ordenado se tienen que ordenar el arreglo o hacer una copia del mismo
