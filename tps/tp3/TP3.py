@@ -120,44 +120,12 @@ def cargar_nuevo_ticket(vector_tickets):
     vector_tickets.append(tickets.Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido_3_digitos))
 
 ######### OPCION 3 ########
-def ordenamiento_secuencial(vector):
-    for i in range(len(vector) - 1):
-        for j in range(i + 1, len(vector)):
-            if int(vector[i].id) > int(vector[j].id):
-                vector[i], vector[j] = vector[j], vector[i]
-# Funcion para mostrar el vector registro 
-def mostrar_tickets(vector_tickets,ordenar=0): # mostrar(vector, 0:desordenado 1:ordenado mayor a menor, )
-    print("\n\nRegistro de tickets\n")
-    
-    if ordenar == 1:
-        ordenamiento_secuencial(vector_tickets)
-    for ticket in vector_tickets:
-        print(ticket)
-        
-######### OPCION 4 ########
-def buscar(vector_tickets,patente,cabina_pais):
-    for ticket in vector_tickets:
-        if ticket.patente.replace(' ','') == patente.upper().replace(' ','') and ticket.cabina_pais == cabina_pais:
-            return ticket
-    return '\nNo se encontro ninguna patente para esta cabina!\n'                
-   
-######### OPCION 5 ########
-def modificar_forma_pago(vector_tickets,id):
-    for ticket in vector_tickets:
-        if ticket.id == id:
-            if ticket.forma_pago == 1:
-                ticket.forma_pago = 2
-            else:
-                ticket.forma_pago = 1
-            return '\nSe cambio la forma de pago para la id '+ ticket.id
-    return '\nNo se encontro la id ingresada!\n'
-         
-######### OPCION 6 ######## 
+
 def origen_patentes_pais(patente):
     is_c_vacio = False
     if patente[0] == ' ':
         is_c_vacio = True
-        
+
     if len(patente) == 7:
         if patente[0].isnumeric() or patente[1].isnumeric():
             return 6
@@ -181,6 +149,68 @@ def origen_patentes_pais(patente):
             return 6
     else:
         return 6
+def ordenamiento_secuencial(vector):
+    for i in range(len(vector) - 1):
+        for j in range(i + 1, len(vector)):
+            if int(vector[i].id) > int(vector[j].id):
+                vector[i], vector[j] = vector[j], vector[i]
+# Funcion para mostrar el vector registro 
+def mostrar_tickets(vector_tickets,ordenar=0): # mostrar(vector, 0:desordenado 1:ordenado mayor a menor, )
+    print("\n\nRegistro de tickets\n")
+    paises = 'Argentina', 'Bolivia', 'Brasil', 'Chile', 'Paraguay', 'Uruguay', 'Otro'
+    if ordenar == 1:
+        ordenamiento_secuencial(vector_tickets)
+    for ticket in vector_tickets: 
+        print(tickets.Ticket.__str__(ticket) + ' {:<20}'.format(
+            'origen patente: ' + paises[origen_patentes_pais(ticket.patente)]))
+        
+######### OPCION 4 ########
+def buscar(vector_tickets,patente,cabina_pais):
+    for ticket in vector_tickets:
+        if ticket.patente.replace(' ','') == patente.upper().replace(' ','') and ticket.cabina_pais == cabina_pais:
+            return ticket
+    return '\nNo se encontro ninguna patente para esta cabina!\n'                
+   
+######### OPCION 5 ########
+def modificar_forma_pago(vector_tickets,id):
+    for ticket in vector_tickets:
+        if ticket.id == id:
+            if ticket.forma_pago == 1:
+                ticket.forma_pago = 2
+            else:
+                ticket.forma_pago = 1
+            return '\nSe cambio la forma de pago para la id '+ ticket.id
+    return '\nNo se encontro la id ingresada!\n'
+         
+######### OPCION 6 ######## 
+# def origen_patentes_pais(patente):
+    # is_c_vacio = False
+    # if patente[0] == ' ':
+    #     is_c_vacio = True
+        
+    # if len(patente) == 7:
+    #     if patente[0].isnumeric() or patente[1].isnumeric():
+    #         return 6
+    #     elif patente[2].isnumeric() and patente[3].isnumeric() and not patente[5].isnumeric() and not patente[6].isnumeric():
+    #         return 0
+    #     elif not is_c_vacio and patente[2].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
+    #         return 1
+    #     elif not is_c_vacio and patente[3].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
+    #         if patente[4].isnumeric():
+    #             return 5
+    #         else:
+    #             return 2
+    #     elif patente[5].isnumeric() and patente[6].isnumeric():
+    #         if not is_c_vacio and patente[4].isnumeric():
+    #             return 4
+    #         elif is_c_vacio and not patente[2].isnumeric() and not patente[3].isnumeric() and not patente[4].isnumeric():
+    #             return 3
+    #         else:
+    #             return 6
+    #     else:
+    #         return 6
+    # else:
+    #     return 6   
 def vehiculos_por_cabina_pais(vector_tickets):
     vector_conteo = 7*[0]
     for ticket in vector_tickets:
