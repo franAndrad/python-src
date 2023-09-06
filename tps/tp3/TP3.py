@@ -157,11 +157,11 @@ def origen_patentes_pais(patente):
     is_c_vacio = False
     if patente[0] == ' ':
         is_c_vacio = True
-
+        
     if len(patente) == 7:
         if patente[0].isnumeric() or patente[1].isnumeric():
             return 6
-        elif patente[2].isnumeric() and not patente[5].isnumeric() and not patente[6].isnumeric():
+        elif patente[2].isnumeric() and patente[3].isnumeric() and not patente[5].isnumeric() and not patente[6].isnumeric():
             return 0
         elif not is_c_vacio and patente[2].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
             return 1
