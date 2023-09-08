@@ -4,8 +4,7 @@ def main():
     op = None
     vector_tickets = []
     vector_acumulador = []
-    mayor = None
-    total = 0
+ 
     
     while op != 0:
         print('')
@@ -61,38 +60,22 @@ def main():
             paises = 'Argentina', 'Bolivia', 'Brasil', 'Chile', 'Paraguay', 'Uruguay', 'Otro'
             print('\nCantidad de vehiculos de cada pais que pasaron por las cabinas:')
             for i in range(len(vector_conteo)):
-                print(paises[i],vector_conteo[i])
+                print("{:<{}}".format(str(paises[i]),10) + ':',vector_conteo[i])
         
         if op == 7:
             vector_acumulador = importe_acumulado_por_pagos(vector_tickets)
             vehiculos = 'Motocicleta', 'Automóvil', 'Camión'
             print('\nImporte acumulado por tipo de vehiculo:')
             for i in range(len(vector_acumulador)):
-                print(vehiculos[i], vector_acumulador[i])
+                print("{:<{}}".format(str(vehiculos[i]),12), ':', vector_acumulador[i])
                
         if op == 8:
-            if len(vector_acumulador) > 0:
-                mayor = max(vector_acumulador)
-                for i in range(len(vector_acumulador)):
-                    total += vector_acumulador[i]
-                porcentaje = mayor * 100 // total
-                
-                print('\nMayor:',mayor)
-                print('Porcentaje:', str(porcentaje) + ' %')
-            else:
-                print('\nNescesita primero obtener el vector acumulador en la opcion 7')
+            mensaje = obtener_porcentaje_mayor(vector_tickets)
+            print(mensaje)
                 
         if op == 9:
-            acumulador_distancias = distancias_acumulada(vector_tickets)
-            total_vehiculos = len(vector_tickets)
-            
-            if acumulador_distancias > 0:
-                promedio = acumulador_distancias // total_vehiculos    
-                cant_may = cantidad_mayores(promedio,vector_tickets)
-                print('\nEl promedio es de: ',promedio)
-                print('La cantidad de autos con una distancia mayor al promedio son: ',cant_may)           
-            else:
-                print('\nDebe ingresar valores de tickets!\n')
+            mensaje = obtener_promedio_distancia_mayor_promedio(vector_tickets)
+            print(mensaje)
             
             
 if __name__ == '__main__':
