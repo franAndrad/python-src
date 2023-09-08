@@ -1,21 +1,24 @@
 from TP3 import *
+
+
 class Ticket:
     def __init__(self, id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido):
-        self.id = "{:010d}".format(int(id)) #Quitar el format si no hace falta agregar los 0
+        # Quitar el format si no hace falta agregar los 0
+        self.id = "{:010d}".format(int(id))
         self.patente = patente.upper()
         self.tipo_vehiculo = tipo_vehiculo
         self.forma_pago = forma_pago
         self.cabina_pais = cabina_pais
         self.km_recorrido = "{:03d}".format(int(km_recorrido))
-    
+
     def __str__(self):
         r = ' '
-        r += ' {:<20}'.format('id: '+ str(self.id))
+        r += ' {:<20}'.format('id: ' + str(self.id))
         r += ' {:<20}'.format('patente: ' + str(self.patente))
         r += ' {:<20}'.format('tipo vehiculo: ' + str(self.tipo_vehiculo))
-        r += ' {:<20}'.format('forma pago: '+ str(self.forma_pago))
-        r += ' {:<20}'.format('cabina pais: '+ str(self.cabina_pais))
-        r += ' {:<20}'.format('km recorrido: '+ str(self.km_recorrido))
+        r += ' {:<20}'.format('forma pago: ' + str(self.forma_pago))
+        r += ' {:<20}'.format('cabina pais: ' + str(self.cabina_pais))
+        r += ' {:<20}'.format('km recorrido: ' + str(self.km_recorrido))
         return r
 
 
@@ -36,15 +39,19 @@ def cargar_tickets(vector_tickets, docfile):
         cabina_pais = linea[19]
         km_recorrido = linea[20:23]
 
-        vector_tickets.append(Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido))
+        vector_tickets.append(
+            Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido))
 
     archivo.close()
 
 ######### OPCION 2 ########
+
+
 def validacion_rango(a, b, var):
     if a <= var <= b:
         return True
     return False
+
 
 def validacion_solo_digitos(vector):
     tam = len(vector)
@@ -55,6 +62,7 @@ def validacion_solo_digitos(vector):
     if cont_digit == tam:
         return True
     return False
+
 
 def cargar_nuevo_ticket(vector_tickets):
     # Validacion de que sean solo digitos y y este entre 1 y 9999999999 incluidos
@@ -108,17 +116,20 @@ def cargar_nuevo_ticket(vector_tickets):
             forma_pago = input('Ingrese la forma de pago: ')
 
     # Valida que sean solo digitos y que este entre 0 y 4 incluidos
-    cabina_pais = input('Ingrese el pais de la cabina donde se hizo el cobro: ')
+    cabina_pais = input(
+        'Ingrese el pais de la cabina donde se hizo el cobro: ')
     while True:
         if validacion_solo_digitos(cabina_pais):
             if validacion_rango(0, 4, int(cabina_pais)):
                 break
             else:
                 print("\nIngrese un pais de cobro valido\n")
-                cabina_pais = input('Ingrese el pais de la cabina donde se hizo el cobro: ')
+                cabina_pais = input(
+                    'Ingrese el pais de la cabina donde se hizo el cobro: ')
         else:
             print("\nIngrese un pais de cobro valido\n")
-            cabina_pais = input('Ingrese el pais de la cabina donde se hizo el cobro: ')
+            cabina_pais = input(
+                'Ingrese el pais de la cabina donde se hizo el cobro: ')
 
     # Valida que sean solo numeros y si es menor que 100 agrega ceros a la izquierda y lo convierte en cadena
     km_recorrido = input('Ingrese la distancia en km desde la ultima cabina: ')
@@ -128,13 +139,16 @@ def cargar_nuevo_ticket(vector_tickets):
                 break
             else:
                 print("\nIngrese una distancia en km valida\n")
-                km_recorrido = input('Ingrese la distancia en km desde la ultima cabina: ')
+                km_recorrido = input(
+                    'Ingrese la distancia en km desde la ultima cabina: ')
         else:
             print("\nIngrese una distancia en km valida\n")
-            km_recorrido = input('Ingrese la distancia en km desde la ultima cabina: ')
+            km_recorrido = input(
+                'Ingrese la distancia en km desde la ultima cabina: ')
 
     # Agrega los ceros a la izquierda si el numero es menor que 100
-    vector_tickets.append(Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido))
+    vector_tickets.append(
+        Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido))
 
 
 ######### OPCION 3 ########
@@ -148,7 +162,7 @@ def origen_patentes_pais(patente):
         if patente[0].isnumeric() or patente[1].isnumeric():
             return 6
         elif patente[2].isnumeric() and patente[3].isnumeric() and not patente[5].isnumeric() and not patente[
-            6].isnumeric():
+                6].isnumeric():
             return 0
         elif not is_c_vacio and patente[2].isnumeric() and patente[5].isnumeric() and patente[6].isnumeric():
             return 1
@@ -161,7 +175,7 @@ def origen_patentes_pais(patente):
             if not is_c_vacio and patente[4].isnumeric():
                 return 4
             elif is_c_vacio and not patente[2].isnumeric() and not patente[3].isnumeric() and not patente[
-                4].isnumeric():
+                    4].isnumeric():
                 return 3
             else:
                 return 6
@@ -169,14 +183,18 @@ def origen_patentes_pais(patente):
             return 6
     else:
         return 6
-    
+
+
 def ordenamiento_secuencial(vector):
     for i in range(len(vector) - 1):
         for j in range(i + 1, len(vector)):
             if int(vector[i].id) > int(vector[j].id):
                 vector[i], vector[j] = vector[j], vector[i]
 # Funcion para mostrar el vector registro
-def mostrar_tickets(vector_tickets, ordenar=0):  # mostrar(vector, 0:desordenado 1:ordenado mayor a menor, )
+
+
+# mostrar(vector, 0:desordenado 1:ordenado mayor a menor, )
+def mostrar_tickets(vector_tickets, ordenar=0):
     print("\n\nRegistro de tickets\n")
     paises = 'Argentina', 'Bolivia', 'Brasil', 'Chile', 'Paraguay', 'Uruguay', 'Otro'
     if ordenar == 1:
@@ -205,6 +223,7 @@ def modificar_forma_pago(vector_tickets, id):
             return '\nSe cambio la forma de pago para la id ' + ticket.id
     return '\nNo se encontro la id ingresada!\n'
 
+
 def vehiculos_por_cabina_pais(vector_tickets):
     vector_conteo = 7 * [0]
     for ticket in vector_tickets:
@@ -226,6 +245,7 @@ def cobro(pais):
     elif paises_mercosur[pais] == 'Uruguay':
         return 300, 'Uruguay'
 
+
 def importe_vehiculo(vehiculo, importe):
     if vehiculo == 0:
         return importe - (50 * importe) / 100
@@ -236,14 +256,17 @@ def importe_vehiculo(vehiculo, importe):
     else:
         return 0
 
+
 def forma_pago(pago, importe):
-    
+
     if pago == 1:
         return importe
     elif pago == 2:
         return importe - (10 * importe) / 100
     else:
         return 0
+
+
 def importe_acumulado_por_pagos(vector_tickets):
     vector_acumulador = 3 * [0]
     for ticket in vector_tickets:
@@ -268,16 +291,19 @@ def obtener_porcentaje_mayor(vector_tickets):
         porcentaje = mayor * 100 // total
         r = '\n'
         r += "{:<{}}".format('Mayor', 12) + ': ' + str(mayor) + '\n'
-        r += "{:<{}}".format('Porcentaje', 12) + ': '+ str(porcentaje) + ' %'
+        r += "{:<{}}".format('Porcentaje', 12) + ': ' + str(porcentaje) + ' %'
         return r
     return '\nNo hay valores cargados'
 
-######### OPCION 9
+# OPCION 9
+
+
 def distancias_acumulada(vector_ticket):
     acum = 0
     for ticket in vector_ticket:
         acum += int(ticket.km_recorrido)
     return acum
+
 
 def cantidad_mayores(a, vector_ticket):
     cant = 0
@@ -286,15 +312,16 @@ def cantidad_mayores(a, vector_ticket):
             cant += 1
     return cant
 
+
 def obtener_promedio_distancia_mayor_promedio(vector_tickets):
-    acumulador_distancias=distancias_acumulada(vector_tickets)
-    total_vehiculos=len(vector_tickets)
+    acumulador_distancias = distancias_acumulada(vector_tickets)
+    total_vehiculos = len(vector_tickets)
     if acumulador_distancias > 0:
-        promedio=acumulador_distancias / total_vehiculos
-        cant_may=cantidad_mayores(promedio, vector_tickets)
+        promedio = acumulador_distancias / total_vehiculos
+        cant_may = cantidad_mayores(promedio, vector_tickets)
         r = '\n'
         r += "{:<{}}".format('Promedio:', 17) + ': ' + str(promedio) + '\n'
-        r += "{:<{}}".format('Autos > Promedio', 17) + ': ' + str(cant_may) + ' %'
+        r += "{:<{}}".format('Autos > Promedio', 17) + \
+            ': ' + str(cant_may) + ' %'
         return r
     return '\nDebe ingresar valores de tickets!\n'
-

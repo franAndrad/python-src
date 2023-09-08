@@ -4,7 +4,7 @@ def main():
     op = None
     vector_tickets = []
     
-    while op != 0:
+    while True:
         print('')
         print('0.Salir')
         print('1.Crear el arreglo de registros')
@@ -18,8 +18,11 @@ def main():
         print('9.Distancia promedio desde la ultima cabina recorrida entre todos los vehiculos y los que recorrieron una distancia mayor al promedio')
         op = input('\nIngrese una opcion: ')
         
-        if validacion_solo_digitos(op):
-            if validacion_rango(1, 9, int(op)):
+        if validacion_solo_digitos(op) and op != '':
+            if validacion_rango(0, 9, int(op)):
+                if op == '0':
+                    break
+                
                 if op == '1':
                     if len(vector_tickets) > 0:
 
@@ -87,6 +90,7 @@ def main():
         else:
             print('\nIngrese una opcion valida!')
             continue
+        
             
 if __name__ == '__main__':
     main()
