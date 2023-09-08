@@ -1,6 +1,3 @@
-from TP3 import *
-
-
 class Ticket:
     def __init__(self, id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido):
         # Quitar el format si no hace falta agregar los 0
