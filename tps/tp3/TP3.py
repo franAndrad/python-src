@@ -1,7 +1,5 @@
 from tickets import *
 def main():
-
-    op = None
     vector_tickets = []
     
     while True:
