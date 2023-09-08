@@ -281,13 +281,16 @@ def obtener_porcentaje_mayor(vector_tickets):
     vector_acumulador = []
     total = 0
     vector_acumulador = importe_acumulado_por_pagos(vector_tickets)
+    vehiculos = 'motocicletas', 'autos', 'camiones'
     if len(vector_acumulador) > 0:
         mayor = max(vector_acumulador)
+        indice_mayor = vector_acumulador.index(mayor)
         for i in range(len(vector_acumulador)):
             total += vector_acumulador[i]
         porcentaje = mayor * 100 // total
         r = '\n'
-        r += "{:<{}}".format('Mayor', 12) + ': ' + str(mayor) + '\n'
+        r += "Los que tuvieron mayor monto acumulado fueron " + str(vehiculos[indice_mayor] + '\n')
+        r += "{:<{}}".format('Monto ', 12)  + ': ' + str(mayor) + ' ' + '\n'
         r += "{:<{}}".format('Porcentaje', 12) + ': ' + str(porcentaje) + ' %'
         return r
     return '\nNo hay valores cargados'
