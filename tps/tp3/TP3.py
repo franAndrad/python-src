@@ -18,10 +18,21 @@ def main():
         print('7.Importe acumulado por pagos de tickets por cada uno de los posibles vehiculos')
         print('8.Vehiculo con mayor monto acumulado y su porcentaje con respecto al total')
         print('9.Distancia promedio desde la ultima cabina recorrida entre todos los vehiculos y los que recorrieron una distancia mayor al promedio')
-        op = int(input('\nIngrese una opcion: '))
+        op = input('\nIngrese una opcion: ')
+        validado = False
+        
+        if validacion_solo_digitos(op):
+            if validacion_rango(0, 9, int(op)):
+                validado = True
+            else:
+                print('\nIngrese una opcion valida!')
+                continue
+        else:
+            print('\nIngrese una opcion valida!')
+            continue
         
         # ¿Mantenemos las opciones asi o las separamos por funciones?
-        if op == 1:
+        if op == '1':
             if len(vector_tickets) > 0:
                 
                 desicion = None
@@ -38,42 +49,42 @@ def main():
             else:    
                 cargar_tickets(vector_tickets, 'peajes-tp3.txt') 
                 
-        if op == 2:
+        if op == '2':
             cargar_nuevo_ticket(vector_tickets)
         
-        if op == 3:
+        if op == '3':
             mostrar_tickets(vector_tickets,1)
             
-        if op == 4:
+        if op == '4':
             patente = input("\nIngrese la patente a buscar: ")
             cabina_pais = input("\nIngrese el pais de la cabina donde se hizo el cobro: ")
             mensaje = buscar(vector_tickets, patente ,cabina_pais)
             print(mensaje)
     
-        if op == 5:
+        if op == '5':
             id = input("\nIngrese el codigo de ticket a cambiar su forma de pago: ")
             mensaje = modificar_forma_pago(vector_tickets,id)
             print(mensaje)
         
-        if op == 6:
+        if op == '6':
             vector_conteo = vehiculos_por_cabina_pais(vector_tickets)
             paises = 'Argentina', 'Bolivia', 'Brasil', 'Chile', 'Paraguay', 'Uruguay', 'Otro'
             print('\nCantidad de vehiculos de cada pais que pasaron por las cabinas:')
             for i in range(len(vector_conteo)):
                 print("{:<{}}".format(str(paises[i]),10) + ':',vector_conteo[i])
         
-        if op == 7:
+        if op == '7':
             vector_acumulador = importe_acumulado_por_pagos(vector_tickets)
             vehiculos = 'Motocicleta', 'Automóvil', 'Camión'
             print('\nImporte acumulado por tipo de vehiculo:')
             for i in range(len(vector_acumulador)):
                 print("{:<{}}".format(str(vehiculos[i]),12), ':', vector_acumulador[i])
                
-        if op == 8:
+        if op == '8':
             mensaje = obtener_porcentaje_mayor(vector_tickets)
             print(mensaje)
                 
-        if op == 9:
+        if op == '9':
             mensaje = obtener_promedio_distancia_mayor_promedio(vector_tickets)
             print(mensaje)
             
