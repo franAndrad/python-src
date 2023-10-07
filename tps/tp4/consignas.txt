@@ -1,0 +1,44 @@
+clase Ticket
+	codigo identificador (longitud>0)
+	patente(entero)(longitud>0)
+	tipo vehiculo (0: motocicleta, 1: automóvil, 2: camión)
+	forma pago (un dígito 1 o 2 que indica la forma de pago (1: manual, 2 telepeaje)
+	pais cabina (0: Argentina - 1: Bolivia - 2: Brasil - 3: Paraguay - 4: Uruguay)
+	km recorridos (entero >= 0) (0 primer cabina que atravieza)
+
+
+importes finales vienen de los tps anteriores
+
+
+
+
+
+archivo:
+	primer linea timestap y despues los datos separados por coma
+
+
+
+modulos(debe tener al menos estos dos): 
+	1. clase
+	2. principal
+
+
+
+
+menu de opciones:
+	punto 1: Cargar los datos mediante un archivo csv (no generar vector sino un binario, desde donde se van a obtener los datos despues para el resto de los puntos). Cada vez que se elija esta opción, el archivo binario debe ser creado de nuevo desde cero, perdiendo todos los registros que ya hubiese contenido. Mensaje de advertencia al usuario de forma que tenga la opción de cancelar la operación.
+
+	punto 2: Cargar nuevo ticket por teclado validando los campos y agregarlos al final del binario, si el archivo no existe debe ser creado.
+
+	punto 3: Mostrar todos los datos grabados sin ordenar, tal como estan
+
+	punto 4: Mostrar registros del binario cuya patente sea igual a p(cargado por teclado). Al final mostrar cuantos registros se mostraron
+
+	punto 5: Buscar un codigo de ticket que sea igual a c(cargado por teclado). Si existe mostrar, sino indicar con un mensaje. Se detiene al encontrar la primer coincidencia
+
+	punto 6: Determinar y mostrar la cantidad de vehiculos de cada combinacion entre tipo de vehiculo y pais cabina (matriz[tipo][cabina] contadora osea matriz[3][5]) mostrar solo los diferentes de 0
+
+	punto 7: En base a la matriz anterior, muestrar la cantidad total de vehículos contados por cada tipo de vehículo(filas) posible, y la cantidad total de vehículos contados por cada país de cabina(columnas) posible.
+
+	punto 8: Calcular y mostrar la distancia promedio desde la última cabina recorrida entre todos los vehículos del archivo binario. Y ahora sí, generar en memoria un arreglo de registros/objetos con todos los tickets del archivo binario cuya distancia recorrida sea mayor al valor promedio que acaba de calcular. Muestre el arreglo, pero ordenado de menor a mayor de acuerdo a la distancia recorrida. Aplicar el shellsort u otro metodo de ordenamiento visto en clases
+
