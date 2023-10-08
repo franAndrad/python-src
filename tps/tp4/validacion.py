@@ -6,10 +6,10 @@ def validar_cadena(mensaje):
     Valida que una cadena de texto tenga al menos un carácter.
 
     Parametros:
-    mensaje (str): El mensaje que solicita la entrada al usuario.
+        mensaje (str): El mensaje que solicita la entrada al usuario.
 
     Retorno
-    str: La cadena de texto validada.
+        str: La cadena de texto validada.
     """
     
     while True:
@@ -24,12 +24,12 @@ def validaciones(mensaje, rango_min, rango_max=None):
     Valida una entrada numérica dentro de un rango especificado.
 
     Parametros:
-    mensaje (str): El mensaje que solicita la entrada al usuario.
-    rango_min (int): El valor mínimo permitido.
-    rango_max (int, optional): El valor máximo permitido. Si no se proporciona, se valida solo el mínimo.
+        mensaje (str): El mensaje que solicita la entrada al usuario.
+        rango_min (int): El valor mínimo permitido.
+        rango_max (int, optional): El valor máximo permitido. Si no se proporciona, se valida solo el mínimo.
 
     Retorno:
-    int: El valor numérico validado.
+        int: El valor numérico validado.
     """
     
     while True:
@@ -46,7 +46,7 @@ def validar_existencia_archivo(fd):
     Valida si un archivo existe en el sistema.
 
     Parametros:
-    fd (str): Ruta del archivo a verificar.
+        fd (str): Ruta del archivo a verificar.
     """
     
     if not os.path.exists(fd):

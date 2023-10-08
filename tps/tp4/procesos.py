@@ -31,11 +31,11 @@ def cargar_datos_desde_csv(fd, fdb):
     Carga datos desde un archivo CSV a un archivo binario.
 
     Parametros:
-    fd (str): Ruta del archivo CSV de entrada.
-    fdb (str): Ruta del archivo binario de salida.
+        fd (str): Ruta del archivo CSV de entrada.
+        fdb (str): Ruta del archivo binario de salida.
 
     Retorno:
-    None
+        None
     """
 
     validar_existencia_archivo(fd)
@@ -86,12 +86,12 @@ def cargar_nuevo_ticket(fd):
     Carga un nuevo ticket al archivo binario.
 
     Parameters:
-    fd (str): Ruta del archivo binario.
-    validar_existencia_archivo(fd)
+        fd (str): Ruta del archivo binario.
 
     Retorno:
-    None
+        None
     """
+    
     validar_existencia_archivo(fd)
 
     m = open(fd, 'ab')
@@ -112,10 +112,10 @@ def mostrar_registros(fd):
     Muestra todos los registros del archivo binario.
 
     Parametros:
-    fd (str): Ruta del archivo binario.
+        fd (str): Ruta del archivo binario.
 
     Retorno:
-    None
+        None
     """
 
     validar_existencia_archivo(fd)
@@ -133,11 +133,11 @@ def mostrar_registros_por_patente(fd, p):
     Muestra los registros de un archivo binario con una patente específica.
 
     Parametros:
-    fd (str): Ruta del archivo binario.
-    p (str): Patente a buscar.
+        fd (str): Ruta del archivo binario.
+        p (str): Patente a buscar.
 
     Retorno:
-    None
+        None
     """
 
     validar_existencia_archivo(fd)
@@ -162,11 +162,11 @@ def buscar_ticket_por_codigo(fd, c):
     Busca un ticket por su código en el archivo binario.
 
     Parametros:
-    fd (str): Ruta del archivo binario.
-    c (int): Código del ticket a buscar.
+        fd (str): Ruta del archivo binario.
+        c (int): Código del ticket a buscar.
 
     Retorno:
-    Ticket o str: El ticket si se encuentra, o un mensaje de error si no.
+        Ticket o str: El ticket si se encuentra, o un mensaje de error si no.
     """
 
     validar_existencia_archivo(fd)
@@ -181,6 +181,16 @@ def buscar_ticket_por_codigo(fd, c):
 
 
 def generar_contador_por_tipo_y_pais(fd):
+    """
+    Genera un contador de vehículos por tipo y país a partir de un archivo binario.
+
+    Parámetros:
+        fd (str): Ruta del archivo binario.
+
+    Retorno:
+        list: Una matriz de contadores por tipo y país.
+    """
+    
     validar_existencia_archivo(fd)
 
     m = open(fd, 'rb')
@@ -196,6 +206,16 @@ def generar_contador_por_tipo_y_pais(fd):
 
 
 def mostrar_contador_por_tipo_y_pais(matriz):
+    """
+    Muestra el contador de vehículos por tipo y país.
+
+    Parámetros:
+        matriz (list): Una matriz de contadores por tipo y país.
+
+    Retorno:
+        None
+    """
+    
     r = ''
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
@@ -205,18 +225,35 @@ def mostrar_contador_por_tipo_y_pais(matriz):
     imprimir_con_cabecera(r, 'CANTIDAD DE VEHÍCULOS POR TIPO Y PAÍS DE CABINA')
 
 
-def mostrar_cantidad_totalizada(matriz, a, b):
+def mostrar_cantidad_totalizada(matriz, recorrer): 
+    """
+    Muestra la cantidad totalizada de vehículos por país o tipo y genera un informe.
+
+    Parámetros:
+        matriz (list): Una matriz de contadores por tipo y país.
+        recorrer (str): La opción para recorrer la matriz. Puede ser 'pais' o 'tipo'.
+
+    Retorno:
+        None
+    """
+    
     tipos = 'Motocicleta', 'Auto', 'Camión'
     paises = 'Argentina', 'Bolivia', 'Brasil', 'Paraguay', 'Uruguay'
     r = ''
+    a, b = 0, 0
+
+    if recorrer == 'pais':
+        a, b = len(matriz), len(matriz[0])
+    elif recorrer == 'tipo':
+        a, b = len(matriz[0]), len(matriz)
     
     ac = 0
-    if a == len(matriz):
+    if recorrer == 'pais':
         for i in range(a):
             for j in range(b):
                 ac += matriz[i][j]
             r += 'Para el país de la cabina ' + paises[i] + ' hay un total de ' + str(ac) + ' vehículos\n'
-    else:
+    elif recorrer == 'tipo':
         for i in range(a):
             for j in range(b):
                 ac += matriz[j][i]
