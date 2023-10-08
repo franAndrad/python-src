@@ -3,38 +3,35 @@ import clase
 import pickle
 
 
-def cargar_datos_desde_csv(fd):
-    v = []
+def cargar_datos_desde_csv(fd, fdb):
+
     if not os.path.exists(fd):
         print('El documento', fd, 'no existe!')
     else:
+        # Se puede abrir dos documentos asi?
         m = open(fd, 'rt')
+        b = open(fdb, 'wb')
 
         timestap = m.readline()
         cabecera = m.readline()
 
-        while True:
-            linea = m.readline()
-            if linea == '':
-                break
-
+        for linea in m:
             linea = linea[:-1]
             ticket = linea.split(',')
+
             id = int(ticket[0])
             patente = ticket[1]
             tipo_vehiculo = int(ticket[2])
             forma_pago = int(ticket[3])
             cabina_pais = int(ticket[4])
             km_recorrido = int(ticket[5])
-            v.append(clase.Ticket(id, patente, tipo_vehiculo,
-                     forma_pago, cabina_pais, km_recorrido))
-        m.close()
 
-        m = open('ticket.dat', 'wb')
-        for ticket in v:
-            pickle.dump(ticket, m)
+            ticket = clase.Ticket(id, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido)
+            pickle.dump(ticket, b)
+        
+        b.close()
         m.close()
-
+        print('Se generó el archivo binario de tickets\n')
 
 def cargar_nuevo_ticket(fd):
     pass
