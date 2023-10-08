@@ -1,0 +1,6 @@
+Preguntas para tp:
+
+	1_ Punto 1: ¿Se pueden abrir dos archivos para trabajarlos en paralelo?
+	2_ timestap, cabecera ¿Se puede mejorar?
+	3_ ¿Se pueden generar mas modulos?
+	4_ While True en menu de opciones, ¿es nescesario poner op = -1?

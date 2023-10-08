@@ -28,7 +28,7 @@ class Ticket:
         self.km_recorrido = km_recorrido
 
     def __str__(self):
-        linea = "id:{:<15}patente:{:<13}tipo vehiculo:{:<7}forma pago:{:<7}cabina pais:{:<7}km recorrido:{:<7}"
-        linea = linea.format(self.id, origen_patentes_pais(self.patente), self.tipo_vehiculo,
+        linea = "id:{:<15}patente:{:<13}pais:{:<13}tipo vehiculo:{:<7}forma pago:{:<7}cabina pais:{:<7}km recorrido:{:<7}"
+        linea = linea.format(self.id, self.patente, origen_patentes_pais(self.patente), self.tipo_vehiculo,
                              self.forma_pago, self.cabina_pais, self.km_recorrido)
         return linea
