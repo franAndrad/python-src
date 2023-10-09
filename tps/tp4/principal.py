@@ -45,8 +45,9 @@ def principal():
                 mostrar_cantidad_totalizada(matriz_contadora, 'tipo')
             else:
                 imprimir_con_cabecera('Primero debe contar combinaciones entre tipo de vehículo y país de cabina (opcion 6)', 'ERROR')
-        # elif opcion == '8':
-        #     distancia_promedio(documento_binario)
+        elif opcion == '8':
+            v, promedio = distancia_promedio(documento_binario)
+            mostrar_registros_mayores_distancia_promedio(v, promedio)
         else:
             print('¡Ingrese una opción válida!')
 

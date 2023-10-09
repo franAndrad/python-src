@@ -1,6 +1,7 @@
 import pickle
 from clase import *
 from validacion import *
+import io
 
 
 def imprimir_con_cabecera(dato, cabecera):
@@ -262,5 +263,90 @@ def mostrar_cantidad_totalizada(matriz, recorrer):
     imprimir_con_cabecera(r, 'TOTAL DE VEHICULOS')
 
 
-# def distancia_promedio(fd):
-#     pass
+def ordenamiento_shell_sort(v):
+    """
+    Ordena la lista de objetos v utilizando el algoritmo de Shell Sort.
+
+    Parametros:
+        v (list): Lista de objetos a ordenar.
+
+    Retorno:
+        None
+    """
+    
+    n = len(v)
+    h = 1
+    while h <= n // 9:
+        h = 3*h + 1
+        
+    while h > 0:
+        for j in range(h, n):
+            y = v[j].km_recorrido
+            atributo = v[j]
+            k = j - h
+            while k >= 0 and y < v[k].km_recorrido:
+                v[k+h] = v[k]
+                k -= h
+            v[k+h] = atributo
+        h //= 3    
+
+
+def distancia_promedio(fdb):
+    """
+    Calcula la distancia promedio de los registros en un archivo y devuelve una lista
+    de registros cuya distancia es mayor que el promedio y el valor promedio.
+
+    Parametros:
+        fdb (str): Nombre del archivo de base de datos.
+
+    Retorno:
+        tuple: Una tupla que contiene una lista de registros con distancias mayores al promedio
+               y el valor del promedio.
+        int: Un numero entero con el valor promedio de las distancias recorridas
+    """
+    
+    validar_existencia_archivo(fdb)
+    
+    v = []
+    cantidad, suma = 0, 0
+    
+    m = open(fdb, 'rb')
+    t = os.path.getsize(fdb)
+    while m.tell() < t:
+        ticket = pickle.load(m)
+        suma += ticket.km_recorrido
+        cantidad += 1
+    
+    promedio = suma // cantidad 
+    m.seek(0, io.SEEK_SET)
+    
+    while m.tell() < t:
+        ticket = pickle.load(m)
+        if ticket.km_recorrido > promedio:
+            v.append(ticket)
+    
+    m.close()
+    return v, promedio
+
+
+def mostrar_registros_mayores_distancia_promedio(v, promedio):
+    """
+    Muestra los registros cuya distancia es mayor que el promedio.
+
+    Parametros:
+        v (list): Lista de registros a mostrar.
+        promedio (int): Valor de la distancia promedio.
+
+    Retorno:
+        None
+    """
+    
+    ordenamiento_shell_sort(v) 
+    
+    r = ''
+    for ticket in v:
+        r += str(ticket) + '\n'
+    r += '\nLa distancia promedio del registro fue de ' + str(promedio) + ' km\n'
+
+    imprimir_con_cabecera(r, 'REGISTROS MAYORES AL PROMEDIO')
+   
