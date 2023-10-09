@@ -4,27 +4,41 @@ from validacion import *
 import io
 
 
-def imprimir_con_cabecera(dato, cabecera):
+def imprimir_con_formato(cabecera):
     """
-    Imprime un mensaje con una cabecera decorativa.
+    Muestra la cabecera del formato a imprimir, va acompañada de la función fin_imprimir_con_formato().
 
-    Parametros:
-    dato (str): El contenido del mensaje.
-    cabecera (str): El título de la cabecera.
+    Parámetros:
+        cabecera (str): Cabecera a mostrar.
 
     Retorno:
-    None
+        None
     """
-
-    cant_caracteres = 130
+    
+    cant_caracteres = 140
     print('\n\n')
     print(cant_caracteres * '=')
     cabecera = "{:^{}}".format(cabecera, cant_caracteres)
     print(cabecera)
     print(cant_caracteres * '=')
-    print(dato)
+    print()
+  
+        
+def fin_imprimir_con_formato():
+    """
+    Muestra el fin del formato a imprimir, va acompañada de la función imprimir_con_formato().
+
+    Parámetros:
+        None
+
+    Retorno:
+        None
+    """
+    
+    print()
+    cant_caracteres = 140
     print(cant_caracteres * '=')
-    print('\n')
+    print()
 
 
 def cargar_datos_desde_csv(fd, fdb):
@@ -43,14 +57,19 @@ def cargar_datos_desde_csv(fd, fdb):
 
     if os.path.exists(fdb):
         while True:
-            datos = '\nEl archivo ' + \
-                str(fdb) + ' existe. ¿Desea sobrescribirlo? \n0: Cancelar\n1: Aceptar\n'
-            imprimir_con_cabecera(datos, 'MENSAJE')
+            
+            sub_menu = 'El archivo ' + str(fdb) + ' existe. ¿Desea sobrescribirlo?' \
+                        '\n0: Cancelar' \
+                        '\n1: Aceptar'           
+            imprimir_con_formato('EL ARCHIVO YA EXISTE!')
+            print(sub_menu)
+            fin_imprimir_con_formato()
 
             op = input('Ingrese una opción: ')
             if op == '0':
-                imprimir_con_cabecera(
-                    'El archivo no se sobrescribió', 'MENSAJE')
+                imprimir_con_formato('MENSAJE')
+                print('El archivo no se sobrescribió')
+                fin_imprimir_con_formato()
                 return
             elif op == '1':
                 break
@@ -66,20 +85,21 @@ def cargar_datos_desde_csv(fd, fdb):
     for linea in m:
         linea = linea[:-1]
         ticket = linea.split(',')
-
         codigo = int(ticket[0])
         patente = ticket[1]
         tipo_vehiculo = int(ticket[2])
         forma_pago = int(ticket[3])
         cabina_pais = int(ticket[4])
         km_recorrido = int(ticket[5])
-
         ticket = Ticket(codigo, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorrido)
         pickle.dump(ticket, b)
 
     b.close()
     m.close()
-    imprimir_con_cabecera('Se generó el archivo binario de tickets', 'MENSAJE')
+    
+    imprimir_con_formato('MENSAJE')
+    print('Se generó el archivo binario de tickets')
+    fin_imprimir_con_formato()
 
 
 def cargar_nuevo_ticket(fd):
@@ -104,8 +124,10 @@ def cargar_nuevo_ticket(fd):
     km_recorridos = validaciones('Ingrese los kilómetros recorridos', 0)
     pickle.dump(Ticket(codigo, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorridos), m)
     m.close()
-    imprimir_con_cabecera(
-        'Se cargó un nuevo ticket al archivo binario.', 'MENSAJE')
+    
+    imprimir_con_formato('MENSAJE')
+    print('Se cargó un nuevo ticket al archivo binario.')
+    fin_imprimir_con_formato()
 
 
 def mostrar_registros(fd):
@@ -123,10 +145,12 @@ def mostrar_registros(fd):
 
     t = os.path.getsize(fd)
     m = open(fd, 'rb')
+    
+    imprimir_con_formato('REGISTROS')
     while m.tell() < t:
         ticket = pickle.load(m)
         print(ticket)
-    print('\n\n')
+    fin_imprimir_con_formato()
 
 
 def mostrar_registros_por_patente(fd, p):
@@ -146,16 +170,16 @@ def mostrar_registros_por_patente(fd, p):
     m = open(fd, 'rb')
     c = 0
     t = os.path.getsize(fd)
-    respuesta = ''
+    
+    imprimir_con_formato('MENSAJE')
     while m.tell() < t:
         ticket = pickle.load(m)
         if ticket.patente == p.upper():
-            respuesta += str(ticket) + '\n'
+            print(ticket)
             c += 1
     m.close()
-
-    respuesta += '\nLa cantidad de veces que aparece esta patente es: ' + str(c)
-    imprimir_con_cabecera(respuesta, 'REGISTROS ECONTRADOS')
+    print('\nLa cantidad de veces que aparece esta patente es:', c)
+    fin_imprimir_con_formato()
 
 
 def buscar_ticket_por_codigo(fd, c):
@@ -217,18 +241,19 @@ def mostrar_contador_por_tipo_y_pais(matriz):
         None
     """
     
-    r = ''
+    imprimir_con_formato('CANTIDAD DE VEHÍCULOS POR TIPO Y PAÍS DE CABINA')
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
-            r += 'Para el tipo de vehículo ' + str(j)
-            r += ' y para el país de cabina ' + str(i)
-            r += ' hay un total de ' + str(matriz[i][j]) + ' vehículos\n'
-    imprimir_con_cabecera(r, 'CANTIDAD DE VEHÍCULOS POR TIPO Y PAÍS DE CABINA')
+            respuesta_cant = 'Para el tipo de vehículo ' + str(j) + \
+                             ' y para el país de cabina ' + str(i) + \
+                             ' hay un total de ' + str(matriz[i][j]) + ' vehículos'
+            print(respuesta_cant)     
+    fin_imprimir_con_formato()
 
 
 def mostrar_cantidad_totalizada(matriz, recorrer): 
     """
-    Muestra la cantidad totalizada de vehículos por país o tipo y genera un informe.
+    Muestra la cantidad totalizada de vehículos por país o tipo.
 
     Parámetros:
         matriz (list): Una matriz de contadores por tipo y país.
@@ -240,27 +265,26 @@ def mostrar_cantidad_totalizada(matriz, recorrer):
     
     tipos = 'Motocicleta', 'Auto', 'Camión'
     paises = 'Argentina', 'Bolivia', 'Brasil', 'Paraguay', 'Uruguay'
-    r = ''
-    a, b = 0, 0
+    a, b, ac = 0, 0, 0
 
     if recorrer == 'pais':
         a, b = len(matriz), len(matriz[0])
     elif recorrer == 'tipo':
         a, b = len(matriz[0]), len(matriz)
     
-    ac = 0
     if recorrer == 'pais':
+        imprimir_con_formato('TOTAL DE VEHICULOS POR PAIS')
         for i in range(a):
             for j in range(b):
                 ac += matriz[i][j]
-            r += 'Para el país de la cabina ' + paises[i] + ' hay un total de ' + str(ac) + ' vehículos\n'
+            print('Para el país de la cabina', paises[i], 'hay un total de', ac, 'vehículos')
     elif recorrer == 'tipo':
+        imprimir_con_formato('TOTAL DE VEHICULOS POR TIPO DE VEHICULO')
         for i in range(a):
             for j in range(b):
                 ac += matriz[j][i]
-            r += 'Para el tipo de vehículo ' + tipos[i] + ' hay un total de ' + str(ac) + ' vehículos\n'    
-    
-    imprimir_con_cabecera(r, 'TOTAL DE VEHICULOS')
+            print('Para el tipo de vehículo', tipos[i], 'hay un total de', ac, 'vehículos')  
+    fin_imprimir_con_formato()
 
 
 def ordenamiento_shell_sort(v):
@@ -278,17 +302,33 @@ def ordenamiento_shell_sort(v):
     h = 1
     while h <= n // 9:
         h = 3*h + 1
-        
+      
     while h > 0:
         for j in range(h, n):
-            y = v[j].km_recorrido
-            atributo = v[j]
+            y = v[j]
             k = j - h
-            while k >= 0 and y < v[k].km_recorrido:
+            while k >= 0 and y.km_recorrido < v[k].km_recorrido:
                 v[k+h] = v[k]
                 k -= h
-            v[k+h] = atributo
+            v[k+h] = y
         h //= 3    
+
+
+def promedio(suma, total):
+    """
+    Calcula el promedio.
+
+    Parámetros:
+        suma (int): Acumulador entero.
+        total (int): Contador entero.
+
+    Retorno:
+        float: Cociente entre la suma y el total, redondeado a dos decimales.
+    """
+    
+    if total != 0:
+        return round(suma / total, 2)
+    return 0
 
 
 def distancia_promedio(fdb):
@@ -309,33 +349,33 @@ def distancia_promedio(fdb):
     
     v = []
     cantidad, suma = 0, 0
-    
     m = open(fdb, 'rb')
     t = os.path.getsize(fdb)
+    
     while m.tell() < t:
         ticket = pickle.load(m)
         suma += ticket.km_recorrido
         cantidad += 1
     
-    promedio = suma // cantidad 
+    prom = promedio(suma, cantidad)
     m.seek(0, io.SEEK_SET)
     
     while m.tell() < t:
         ticket = pickle.load(m)
-        if ticket.km_recorrido > promedio:
+        if ticket.km_recorrido > prom:
             v.append(ticket)
     
     m.close()
-    return v, promedio
+    return v, prom
 
 
-def mostrar_registros_mayores_distancia_promedio(v, promedio):
+def mostrar_registros_mayores_distancia_promedio(v, p):
     """
     Muestra los registros cuya distancia es mayor que el promedio.
 
     Parametros:
         v (list): Lista de registros a mostrar.
-        promedio (int): Valor de la distancia promedio.
+        p (int): Valor de la distancia promedio.
 
     Retorno:
         None
@@ -343,10 +383,9 @@ def mostrar_registros_mayores_distancia_promedio(v, promedio):
     
     ordenamiento_shell_sort(v) 
     
-    r = ''
+    imprimir_con_formato('REGISTROS MAYORES AL PROMEDIO')
     for ticket in v:
-        r += str(ticket) + '\n'
-    r += '\nLa distancia promedio del registro fue de ' + str(promedio) + ' km\n'
-
-    imprimir_con_cabecera(r, 'REGISTROS MAYORES AL PROMEDIO')
+        print(ticket)
+    print('\nLa distancia promedio del registro fue de', p, 'km')
+    fin_imprimir_con_formato()
    

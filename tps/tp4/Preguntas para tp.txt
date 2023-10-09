@@ -4,3 +4,4 @@ Preguntas para tp:
 	2_ timestap, cabecera ¿Se puede mejorar?
 	3_ ¿Se pueden generar mas modulos?
 	4_ While True en menu de opciones, ¿es nescesario poner op = -1?
+	5_ Es buena practica acumular los valores para mostrarlo con un formato

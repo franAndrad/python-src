@@ -10,8 +10,11 @@ def menu():
                 "5. Buscar un código de ticket\n" \
                 "6. Contar combinaciones entre tipo de vehículo y país de cabina\n" \
                 "7. Contar por tipo y país\n" \
-                "8. Calcular distancia promedio y mostrar registros filtrados\n"
-    imprimir_con_cabecera(opciones, 'MENU DE OPCIONES')
+                "8. Calcular distancia promedio y mostrar registros filtrados"
+    imprimir_con_formato('MENU DE OPCIONES')
+    print(opciones)
+    fin_imprimir_con_formato()
+    
     return input('Ingrese una opción: ')
 
 
@@ -35,7 +38,9 @@ def principal():
             mostrar_registros_por_patente(documento_binario, p)
         elif opcion == '5':
             c = int(input('\nIngresar código de ticket a buscar: '))
-            imprimir_con_cabecera(buscar_ticket_por_codigo(documento_binario, c), 'REGISTRO ENCONTRADO')
+            imprimir_con_formato('REGISTRO ENCONTRADO')
+            print(buscar_ticket_por_codigo(documento_binario, c))
+            fin_imprimir_con_formato()
         elif opcion == '6':
             matriz_contadora = generar_contador_por_tipo_y_pais(documento_binario)
             mostrar_contador_por_tipo_y_pais(matriz_contadora)
@@ -44,12 +49,16 @@ def principal():
                 mostrar_cantidad_totalizada(matriz_contadora, 'pais')
                 mostrar_cantidad_totalizada(matriz_contadora, 'tipo')
             else:
-                imprimir_con_cabecera('Primero debe contar combinaciones entre tipo de vehículo y país de cabina (opcion 6)', 'ERROR')
+                imprimir_con_formato('ERROR')
+                print('Primero debe contar combinaciones entre tipo de vehículo y país de cabina (opcion 6)')
+                fin_imprimir_con_formato()
         elif opcion == '8':
-            v, promedio = distancia_promedio(documento_binario)
-            mostrar_registros_mayores_distancia_promedio(v, promedio)
+            v, p = distancia_promedio(documento_binario)
+            mostrar_registros_mayores_distancia_promedio(v, p)
         else:
+            imprimir_con_formato('ERROR')
             print('¡Ingrese una opción válida!')
+            fin_imprimir_con_formato()
 
 
 if __name__ == '__main__':
