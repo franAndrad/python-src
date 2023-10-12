@@ -12,11 +12,12 @@ def validar_cadena(mensaje):
         str: La cadena de texto validada.
     """
     
-    while True:
-        cadena = input(mensaje)
-        if len(cadena) > 0:
-            return cadena
+    cadena = input(mensaje)
+    while len(cadena) == 0:
         print("Debe tener al menos un carácter. Intenta de nuevo")
+        cadena = input(mensaje)
+
+    return cadena
 
 
 def validaciones(mensaje, rango_min, rango_max=None):
@@ -32,13 +33,14 @@ def validaciones(mensaje, rango_min, rango_max=None):
         int: El valor numérico validado.
     """
     
-    while True:
-        entrada = input(f"{mensaje}: ")
-        if entrada.isdigit():
-            numero = int(entrada)
-            if (rango_max is None and numero >= rango_min) or (rango_min <= numero <= rango_max):
-                return numero
+    entrada = input(f"{mensaje}: ")
+    while not entrada.isdigit() or \
+    (rango_max is not None and not (rango_min <= int(entrada) <= rango_max)) or \
+    (rango_max is None and int(entrada) < rango_min):
         print('Ingrese un valor válido. Intenta de nuevo.')
+        entrada = input(f"{mensaje}: ")
+
+    return int(entrada)
             
 
 def validar_existencia_archivo(fd):
