@@ -35,8 +35,8 @@ def validaciones(mensaje, rango_min, rango_max=None):
     
     entrada = input(f"{mensaje}: ")
     while not entrada.isdigit() or \
-    (rango_max is not None and not (rango_min <= int(entrada) <= rango_max)) or \
-    (rango_max is None and int(entrada) < rango_min):
+        (rango_max is not None and not (rango_min <= int(entrada) <= rango_max)) or \
+            (rango_max is None and int(entrada) < rango_min):
         print('Ingrese un valor válido. Intenta de nuevo.')
         entrada = input(f"{mensaje}: ")
 

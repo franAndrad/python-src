@@ -1,4 +1,14 @@
 def origen_patentes_pais(patente):
+    """
+    Determina el origen del país mediante una cadena de caracteres.
+
+    Parámetros:
+        patente (str): Cadena de caracteres para determinar su origen.
+
+    Retorno:
+        str: Origen de la patente.
+    """
+    
     if len(patente) != 7:
         return 'Otro'
 

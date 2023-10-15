@@ -120,7 +120,8 @@ def cargar_nuevo_ticket(fd):
     patente = validar_cadena('Ingrese la patente: ').upper()
     tipo_vehiculo = validaciones('Ingrese el tipo de vehículo (0: motocicleta, 1: automóvil, 2: camión)', 0, 2)
     forma_pago = validaciones('Ingrese la forma de pago (1: manual, 2: telepeaje)', 1, 2)
-    cabina_pais = validaciones('Ingrese la cabina del país (0: Argentina - 1: Bolivia - 2: Brasil - 3: Paraguay - 4: Uruguay)', 0, 4)
+    cabina_pais = validaciones('Ingrese la cabina del país '
+                               '(0: Argentina - 1: Bolivia - 2: Brasil - 3: Paraguay - 4: Uruguay)', 0, 4)
     km_recorridos = validaciones('Ingrese los kilómetros recorridos', 0)
     pickle.dump(Ticket(codigo, patente, tipo_vehiculo, forma_pago, cabina_pais, km_recorridos), m)
     m.close()
@@ -178,7 +179,7 @@ def mostrar_registros_por_patente(fd, p):
             print(ticket)
             c += 1
     m.close()
-    print('\nLa cantidad de veces que aparece esta patente es:', c)
+    print('\nLa cantidad de veces que aparece la patente', p, 'es de:', c)
     fin_imprimir_con_formato()
 
 
