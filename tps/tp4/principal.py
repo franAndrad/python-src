@@ -22,7 +22,6 @@ def principal():
     documento = 'peajes-tp4.csv'
     documento_binario = 'ticket.dat'
     matriz_contadora = []
-
     opcion = -1
     while opcion != 0:
         opcion = menu()
@@ -38,6 +37,7 @@ def principal():
         elif opcion == 5:
             c = int(input('\nIngresar código de ticket a buscar: '))
             imprimir_con_formato('REGISTRO ENCONTRADO')
+            imprimir_cabecera()
             print(buscar_ticket_por_codigo(documento_binario, c))
             fin_imprimir_con_formato()
         elif opcion == 6:

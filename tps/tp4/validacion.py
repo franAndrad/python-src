@@ -1,6 +1,3 @@
-import os
-
-
 def validar_cadena(mensaje):
     """
     Valida que una cadena de texto tenga al menos un carácter.
@@ -41,16 +38,3 @@ def validaciones(mensaje, rango_min, rango_max=None):
         entrada = input(f"{mensaje}: ")
 
     return int(entrada)
-            
-
-def validar_existencia_archivo(fd):
-    """
-    Valida si un archivo existe en el sistema.
-
-    Parametros:
-        fd (str): Ruta del archivo a verificar.
-    """
-    
-    if not os.path.exists(fd):
-        print('El documento', fd, 'no existe!')
-        return
