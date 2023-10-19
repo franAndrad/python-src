@@ -19,7 +19,7 @@ def carga_automatica(vec):
         pasaportes = '1DA4f', '1ACSA' , 'ASDFE' , 'FDSFA'
         nombres = 'Francisco', 'Julian', 'Martin'
         
-        pasaporte = random.choice(pasaportes)
+        pasaporte = rand-om.choice(pasaportes)
         nombre = random.choice(nombres)
         codigo_destino = random.randint(100,103)
         codigo_clase = random.randint(1, 10)
@@ -86,6 +86,7 @@ def buscar_pasajero(pas,vec):
 
 def principal():
     vec_ventas = []
+    random.seed(1)
 
     while True:
 

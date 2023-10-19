@@ -6,10 +6,11 @@ DEPORTE = 'Natacion', 'Basquet', 'Karate', 'Futbol', 'Patin'
 
 def menu():
     print('')
-    print('1.')
-    print('2.')
-    print('3.')
+    print('1. Hola soy fran')
+    print('2. Hola soy marti')
+    print('3. Marti dawn')
     print('4.')
+    print('5.')
     print('')
     return int(input('Ingrese una opcion: '))
 
@@ -35,7 +36,7 @@ def mostrar_vector(v):
 
 def buscar_socio(v, socio, deporte):
     for i in range(len(v)):
-        if v[i].socio == socio and v[i].deporte == deporte:
+        if v[i].socio == socio and DEPORTE[v[i].deporte] == deporte:
             return i
     return -1
 
@@ -52,7 +53,7 @@ def modificar_agregar_socio(v, i, socio, deporte):
     pago = int(input('Ingrese el valor de pago: '))
     if i != -1:
         v[i].dia = dia
-        v[i].pago = pago
+        v[i].valor_cuota = pago
         return 'Se modifico el dia a ' + str(dia) +  ' y el valor de pago a ' + str(pago)
      
     else:
