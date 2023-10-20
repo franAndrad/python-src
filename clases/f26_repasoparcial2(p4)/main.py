@@ -35,14 +35,19 @@ def main():
             else:
                 print('No existe ningun profesional con ese dni')
         elif op == 4:
-            pass
+            crear_binario('profesionales.dat', vec_profesionales)
         elif op == 5:
-            pass
+            mostrar_binario('profesionales.dat')
         elif op == 6:
-            pass
+            nom = input('Ingrese el nombre del profesional a buscar: ')
+            indice = busqueda_secuencial(nom, vec_profesionales)
+            if indice !=  -1:
+                print(vec_profesionales[indice])
+            else:
+                print('No se econtro un profesional con ese nombre.')
         elif op == 7:
-            pass
-        
+            m = crear_matriz_contadora_afiliado_trabajo(vec_profesionales)
+            mostrar_matriz_contadora(m)
 
 if __name__ == '__main__':
     main()
